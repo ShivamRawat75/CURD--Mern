@@ -1,6 +1,8 @@
 import { FormControl, FormGroup, Input, InputLabel, Typography, styled, Button } from '@mui/material';
 
+import { useState } from 'react';
 
+import { addUser } from '../service/api';
 
 const Container = styled(FormGroup)`
 margin:5% auto 0 auto;
@@ -8,14 +10,36 @@ width:50%;
 & > div{
     margin-top:20px;
 }
+`;
 
-`
-
-const onValueChange=(e)=>{
-    console.log(e.target.name,e.target.value);
+const defaultValue={
+    name:'',
+    username:'',
+    email:'',
+    phone:''
 }
 
+
 const AddUser = () => {
+
+    const [user,setUser]=useState(defaultValue);
+
+    const onValueChange=(e)=>{
+
+               
+        setUser({...user,[ e.target.name]: e.target.value});
+        
+    
+    }
+
+    const addUserDetails=async()=>{
+
+        await addUser(user);
+
+    }
+
+
+
     return (
         <Container>
             <Typography variant='h4'>Add User</Typography>
@@ -36,7 +60,7 @@ const AddUser = () => {
                 <Input onChange={(e)=>onValueChange(e)}name ="phone"/>
             </FormControl>
             <FormControl>
-                <Button variant='contained'>Add user</Button>
+                <Button variant='contained' onClick={()=>addUserDetails()}>Add user</Button>
             </FormControl>
         </Container>
     );
