@@ -2,9 +2,9 @@ import mongoose from "mongoose"
 
 
 
-const Connection=async()=>{
+const Connection=async(username,password)=>{
 
-    const URL='mongodb+srv://admin:54321@cluster0.xubb5fh.mongodb.net/?retryWrites=true&w=majority';
+    const URL=`mongodb+srv://${username}:${password}@crud-mern.qslh6sy.mongodb.net/?retryWrites=true&w=majority`;
 
     try {
 
